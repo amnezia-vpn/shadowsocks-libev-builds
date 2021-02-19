@@ -12,7 +12,7 @@ env:
         - LIBSODIUM_VER=1.0.12
         - MBEDTLS_VER=2.4.0
 before_install:
-    - git clone https://github.com/shadowsocks/shadowsocks-libev.git
+    - git clone --recurse-submodules --remote-submodules https://github.com/shadowsocks/shadowsocks-libev.git
     - mv shadowsocks-libev/* .
     - |
       if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -54,6 +54,8 @@ script:
       fi
     - make
     - cd build && cmake ../ && make
+    - make clean
+    - ls -al
 branches:
     only:
         - master
