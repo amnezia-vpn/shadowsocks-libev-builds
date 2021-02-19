@@ -11,7 +11,6 @@ env:
     global:
         - LIBSODIUM_VER=1.0.12
         - MBEDTLS_VER=2.4.0
-        - INSTALL_DIR=$HOME/build/release
         - DEPLOY_ARTIFACT=$HOME/build/ss-libev-${TRAVIS_OS_NAME}-${TRAVIS_COMPILER}.tar.gz
 before_install:
     - git clone --recurse-submodules https://github.com/shadowsocks/shadowsocks-libev.git
@@ -50,7 +49,7 @@ addons:
 script:
     - ./autogen.sh
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-          ./configure --disable-documentation --with-mbedtls=/usr/local/opt/mbedtls --with-sodium=/usr/local/opt/libsodium --prefix=$INSTALL_DIR;
+          ./configure --disable-documentation --with-mbedtls=/usr/local/opt/mbedtls --with-sodium=/usr/local/opt/libsodium;
       else
           ./configure;
       fi
@@ -58,8 +57,8 @@ script:
     - cd build && cmake ../ && make
     - make clean 
     - mkdir -p $INSTALL_DIR && make install
-    - ls -al $INSTALL_DIR
-    - tar -cvzf $DEPLOY_ARTIFACT $INSTALL_DIR
+    - ls -al .
+    - tar -cvzf $DEPLOY_ARTIFACT .
     
 deploy:
   provider: releases
