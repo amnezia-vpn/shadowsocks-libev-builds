@@ -56,7 +56,6 @@ script:
     - make
     - cd build && cmake ../ && make
     - make clean 
-    - mkdir -p $INSTALL_DIR && make install
     - ls -al .
     - tar -cvzf $DEPLOY_ARTIFACT .
     
