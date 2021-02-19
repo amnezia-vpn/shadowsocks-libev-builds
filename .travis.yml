@@ -64,7 +64,6 @@ deploy:
   skip_cleanup: true
   file:
   - "$HOME/build/ss-libev-$TRAVIS_OS_NAME-$TRAVIS_COMPILER.tar.gz"
+  on:
+    tags: true
   
-branches:
-    only:
-        - master
