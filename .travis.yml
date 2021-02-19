@@ -11,7 +11,7 @@ env:
     global:
         - LIBSODIUM_VER=1.0.12
         - MBEDTLS_VER=2.4.0
-        - DEPLOY_ARTIFACT=$HOME/build/ss-libev-${TRAVIS_OS_NAME}-${TRAVIS_COMPILER}.tar.gz
+        - DEPLOY_ARTIFACT="$HOME/build/ss-libev-${TRAVIS_OS_NAME}-${TRAVIS_COMPILER}.tar.gz"
 before_install:
     - git clone --recurse-submodules https://github.com/shadowsocks/shadowsocks-libev.git
     - mv shadowsocks-libev/* .
@@ -55,7 +55,7 @@ script:
       fi
     - make
     - cd build && cmake ../ && make
-    - make clean 
+    - echo "$TRAVIS_COMPILER"
     - ls -al .
     - tar -cvzf $DEPLOY_ARTIFACT .
     
