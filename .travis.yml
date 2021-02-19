@@ -56,12 +56,14 @@ script:
     - make
     - cd build && cmake ../ && make
     - echo "$TRAVIS_COMPILER"
-    - ls -al .
-    - tar -cvzf $DEPLOY_ARTIFACT .
+    - echo "$DEPLOY_ARTIFACT"
+    - ls -al ./bin
+    - tar -cvzf "$DEPLOY_ARTIFACT" ./bin/ -C bin .
     
 deploy:
   provider: releases
   api_key: $GH_TOKEN
+  skip_cleanup: true
   file:
   - "$DEPLOY_ARTIFACT"
   
